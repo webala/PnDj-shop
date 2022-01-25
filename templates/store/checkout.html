@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class='shipping-showcase'>
+    <forn  method='post' id='shipping-form'>
+        <div id="user-information">
+            <div>
+                <input type="text" name='name' placeholder='Your Name' id='name' class='form-control w-50'>
+            </div>
+            <div>
+                <input type="email" name='email' placeholder='Your Email' id='email' class='form-control w-50'>
+            </div>
+        </div>
+
+        <div id="shipping-information">
+            <div>
+                <input type="text" name='location' placeholder='Your Location' id='location' class='form-control w-50'>
+            </div>
+            <div>
+                <input type="text" name='estate' placeholder='Estate' id='estate' class='form-control w-50'>
+            </div>
+            <div>
+                <input type="text" name='house-no' placeholder='House Number' id='house-no' class='form-control w-50'>
+            </div>
+        </div>
+     <button class="btn btn-success">Complete order</button>
+    </forn>
+
+    <div class="summary">
+        <h2>Summary:</h2>
+        <p>Phoenix-suns top (2)</p>
+        <p>Phoenix-suns top (2)</p>
+        <p>Phoenix-suns top (2)</p>
+        <p>Phoenix-suns top (2)</p>
+        <h3>Total: ksh 10000</h3>
+        <div class="">
+            <a class="btn btn-outline-secondary btn-sm checkout-btn" href="{% url 'cart' %}">&#x2190 Back to cart</a>
+        </div> 
+    </div>
+</div>
+
+
+
+
+{% endblock %}

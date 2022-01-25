@@ -117,3 +117,24 @@ body {
     margin-left: 50px;
 }
 
+.shipping-showcase{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.shipping-showcase .summary {
+    width: 70%;
+    border: none;
+    line-height: 2rem;
+}
+
+#shipping-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#shipping-form div {
+    width: 100%;
+    margin: 50px;
+}
