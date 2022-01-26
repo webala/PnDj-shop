@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="add-product-showcase">
+    <form action="/product/add" class='form' method='post' enctype="multipart/form-data"> {% csrf_token %}
+        {{product_form.as_p}}
+        <button type="submit" class="btn btn-primary">Add new product</button>
+        <a href="{% url 'store' %}" class="btn btn-outline-primary">Back to store</a>
+    </form>
+</div>
+
+
+
+
+{% endblock  %}

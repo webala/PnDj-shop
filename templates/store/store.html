@@ -6,149 +6,23 @@
 
 <div class="">
     <div class="products-showcase">
+        {% for product in products %}
         <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
+            <img src="{{product.image.url}}" alt="placeholder">
             <div class="product-description border-top">
                 <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
+                    <h3>{{product.name}}</h3>
+                    <p>Price: ksh{{product.price}}</p>
                 </div>
                 
                 <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
+                    <button class='btn btn-sm btn-primary update-cart' data-action='add' data-product={{product.id}}>Add</button>
+                    <button class="btn btn-sm btn-outline-success update-cart">View</button>
                 </div>   
             </div>
         </div>
-
-        <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-            <div class="product-description border-top">
-                <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
-                </div>
-                
-                <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
-                </div>   
-            </div>
-            
-        </div>
-
-        <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-            <div class="product-description border-top">
-                <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
-                </div>
-                
-                <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
-                </div>   
-            </div>
-            
-        </div>
-
-        <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-            <div class="product-description border-top">
-                <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
-                </div>
-                
-                <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
-                </div>   
-            </div>
-            
-        </div>
-
-        <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-            <div class="product-description border-top">
-                <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
-                </div>
-                
-                <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
-                </div>   
-            </div>
-            
-        </div>
-
-        <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-            <div class="product-description border-top">
-                <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
-                </div>
-                
-                <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
-                </div>   
-            </div>
-            
-        </div>
-
-        <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-            <div class="product-description border-top">
-                <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
-                </div>
-                
-                <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
-                </div>   
-            </div>
-            
-        </div>
-
-        <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-            <div class="product-description border-top">
-                <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
-                </div>
-                
-                <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
-                </div>   
-            </div>
-            
-        </div>
-
-        <div class="product">
-            <img src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-            <div class="product-description border-top">
-                <div>
-                    <h3>Phoenix-suns top</h3>
-                    <p>ksh 1000</p>
-                </div>
-                
-                <div class="btn-group">
-                    <button class='btn btn-sm btn-primary'>Add</button>
-                    <button class="btn btn-sm btn-outline-success">View</button>
-                </div>   
-            </div>
-            
-        </div>
-    </div>
+        {% endfor %}
+    </div>   
 </div>
 
 

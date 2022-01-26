@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
 
 body {
-    font-family: 'Exo 2', sans-serif;
+    font-family: 'Dongle', sans-serif;
 }
 
 .logo img {
@@ -137,4 +137,22 @@ body {
 #shipping-form div {
     width: 100%;
     margin: 50px;
+}
+
+.add-product-showcase {
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+}
+
+.form input{
+    border-radius: 10px;
+    border: .1rem solid;
+    
+}
+
+#id_image {
+    border: none;
+    height: 110%;
+    padding: 1rem;
 }
