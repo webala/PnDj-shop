@@ -2,11 +2,14 @@
 {% load static %}
 
 {% block content %}
+<script type='text/javascript' src="{% static 'js/checkout.js' %}" defer></script>
 <div class='shipping-showcase'>
-    <forn  method='post' id='shipping-form'>
+    <form  method='post' id='shipping-form'>{% csrf_token %}
         <div id="user-information">
-            <div>
+            <div> 
+                <label for="name">
                 <input type="text" name='name' placeholder='Your Name' id='name' class='form-control w-50'>
+                </label>
             </div>
             <div>
                 <input type="email" name='email' placeholder='Your Email' id='email' class='form-control w-50'>
@@ -21,19 +24,20 @@
                 <input type="text" name='estate' placeholder='Estate' id='estate' class='form-control w-50'>
             </div>
             <div>
-                <input type="text" name='house-no' placeholder='House Number' id='house-no' class='form-control w-50'>
+                <input type="text" name='house_no' placeholder='House Number' id='house_no' class='form-control w-50'>
             </div>
         </div>
-     <button class="btn btn-success">Complete order</button>
-    </forn>
+     <button class="btn btn-success" id='complete-order'>Complete order</button>
+    </form>
 
     <div class="summary">
         <h2>Summary:</h2>
-        <p>Phoenix-suns top (2)</p>
-        <p>Phoenix-suns top (2)</p>
-        <p>Phoenix-suns top (2)</p>
-        <p>Phoenix-suns top (2)</p>
-        <h3>Total: ksh 10000</h3>
+        {% for item in cart_items %}
+            <p>{{item.product.name}} ({{item.quantity}})</p>
+        {% endfor %}
+        
+        
+        <h3>Total: ksh {{order_total}}</h3>
         <div class="">
             <a class="btn btn-outline-secondary btn-sm checkout-btn" href="{% url 'cart' %}">&#x2190 Back to cart</a>
         </div> 

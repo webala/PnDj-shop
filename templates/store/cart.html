@@ -2,54 +2,39 @@
 {% load static %}
 
 {% block content %}
+
+
 <div class='cart-showcase'>
-    <div class="cart-item">
-        <img class='product-image' src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-        <p>Phoenix-suns top</p>
-        <p>Price: ksh 1000</p>
-        <div class="quantity">
-            <img src="{% static 'images/arrow-up.png' %}" alt="arrow-up" class="add">
-            <img src="{% static 'images/arrow-down.png' %}" alt="arrow-down" class="remove">
-            <p>Quantity: 2</p>    
+    {% if not cart_items %}
+        <h3>Currently no items in the cart</h3>
+    {% else %}
+
+        {% for item in cart_items %}
+            <div class="cart-item">
+                <img class='product-image' src="{{item.product.image.url}}" alt="placeholder">
+                <p>{{item.product.name}}</p>
+                <p>Price: {{item.product.price}}</p>
+                <div class="quantity">
+                    <img src="{% static 'images/arrow-up.png' %}" alt="arrow-up" class="add update-cart" data-product='{{item.product.id}}' data-action='add'>
+                    <img src="{% static 'images/arrow-down.png' %}" alt="arrow-down" class="remove update-cart" data-product='{{item.product.id}}' data-action='remove'>
+                    <p>Quantity: {{item.quantity}}</p>    
+                </div>
+            </div>
+        {% endfor %}
+        
+
+        <div class="summary">
+            <h2>Summary:</h2>
+            {% for item in cart_items %}
+                <p>{{item.product.name}} ({{item.quantity}})</p>
+            {% endfor %}
+            <h3>Total: ksh {{order_total}}</h3>
+            <div class="">
+                <a class="btn btn-primary btn-sm checkout-btn" href="{% url 'checkout' %}">Checkout</a>
+                <a class="btn btn-outline-secondary btn-sm" href="{% url 'store' %}">&#x2190 Back to store</a>
+            </div> 
         </div>
-    </div>
-
-    <div class="cart-item">
-        <img class='product-image' src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-        <p>Phoenix-suns top</p>
-        <p>Price: ksh 1000</p>
-        <div class="quantity">
-            <img src="{% static 'images/arrow-up.png' %}" alt="arrow-up" class="add">
-            <img src="{% static 'images/arrow-down.png' %}" alt="arrow-down" class="remove">
-            <p>Quantity: 2</p>   
-        </div>
-    </div>
-
-    <div class="cart-item">
-        <img class='product-image' src="{% static 'images/phoenix-placeholder.jpeg' %}" alt="placeholder">
-        <p>Phoenix-suns top</p>
-        <p>Price: ksh 1000</p>
-        <div class="quantity">
-            <img src="{% static 'images/arrow-up.png' %}" alt="arrow-up" class="add">
-            <img src="{% static 'images/arrow-down.png' %}" alt="arrow-down" class="remove">
-            <p>Quantity: 2</p>
-            
-        </div>
-    </div>
-
-    <div class="summary">
-        <h2>Summary:</h2>
-        <p>Phoenix-suns top (2)</p>
-        <p>Phoenix-suns top (2)</p>
-        <p>Phoenix-suns top (2)</p>
-        <p>Phoenix-suns top (2)</p>
-        <h3>Total: ksh 10000</h3>
-        <div class="">
-            <a class="btn btn-primary btn-sm checkout-btn" href="{% url 'checkout' %}">Checkout</a>
-            <a class="btn btn-outline-secondary btn-sm" href="{% url 'store' %}">&#x2190 Back to store</a>
-        </div> 
-    </div>
-
+    {% endif %}
 </div>
 
 

@@ -19,7 +19,7 @@ class Product(models.Model):
         return self.name
 
     
-class Order(models.Model): #can also be considered to be the cart
+class Order(models.Model): # can also be considered to be the cart
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
@@ -27,6 +27,17 @@ class Order(models.Model): #can also be considered to be the cart
 
     def __str__(self):
         return self.id
+    
+    @property
+    def get_cart_items(self):
+        cart_items = self.cartitem_set.all()
+        return sum([item.quantity for item in cart_items])
+
+    @property
+    def get_cart_total(self):
+        cart_items = self.cartitem_set.all()
+        return sum([item.get_item_total for item in cart_items])
+
 
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -34,8 +45,14 @@ class CartItem(models.Model):
     quantity = models.IntegerField(default=0)
     date_added = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def get_item_total(self):
+        return self.quantity * self.product.price
+
 
 class ShippingAddress(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     location = models.CharField(max_length=200)
     estate = models.CharField(max_length=200)
     house_number = models.CharField(max_length=200)
