@@ -1,3 +1,26 @@
+function getCartCookie () {
+    let name = 'cart';
+
+    var cookieArray  = document.cookie.split(';');
+
+    for (var i = 0; i < cookieArray.length; i++) {
+        var cookiePair = cookieArray[i].split('=');
+
+        if (name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+
+var cart = JSON.parse(getCartCookie());
+
+if (cart == undefined) {
+    cart = {};
+    document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/';
+}
+
+
 let cart_items = 0;
 let cartItemsParagraph = document.querySelector('#cart_items')
 
@@ -22,8 +45,29 @@ updateBtns.forEach((btn)=> {
         if (user != 'AnonymousUser') {
             updateUserCart(action, productId);
         }
+        else {
+            addCookieItem(action, productId)
+        }
     })
 })
+
+const addCookieItem = (action, productId) => {
+    if (action == 'add'){
+        if (cart[productId] == undefined) {
+            cart[productId] = {'quantity': 1};
+        } else {
+            cart[productId]['quantity'] += 1;
+        }
+    }else if (action == 'remove') {
+        cart[productId]['quantity'] -= 1;
+
+        if (care['productId'] <= 0) {
+            delete cart[productId];
+        }
+    }
+    console.log(cart)
+    document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/';
+}
 
 const updateUserCart = (action, productId) => {
     console.log('User authenticated')

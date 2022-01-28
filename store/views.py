@@ -1,12 +1,13 @@
 import imp
 from django.shortcuts import render
 from datetime import datetime
+import json
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .forms import ProductForm
 from .models import CartItem, Order, Product, ShippingAddress
 from .serializers import UpdateCartSerializer, ShippingInformationSerializer
-
+from .utils import cartData
 # Create your views here.
 
 def store(request):
@@ -19,12 +20,12 @@ def store(request):
     return render(request, 'store/store.html',context)
 
 def cart(request):
-    customer = request.user.customer
-    order = Order.objects.get(customer=customer, complete=False)
+    data = cartData(request)
+    cart_items = data['items']
+    order = data['order']
+    
 
-    cart_items = order.cartitem_set.all()
-
-    context = {'cart_items': cart_items, 'order_total': order.get_cart_total}
+    context = {'cart_items': cart_items, 'order_total': order['get_cart_total']}
     return render(request, 'store/cart.html', context)
 
 
@@ -85,13 +86,25 @@ def update_cart(request):
 
 @api_view(['GET'])
 def cart_items(request):
-    customer = request.user.customer
-    order = Order.objects.get(customer=customer, complete=False)
+    if request.user.is_authenticated:
 
-    if order:
-        cart_items = order.get_cart_items
+        customer = request.user.customer
+        order = Order.objects.get(customer=customer, complete=False)
+        if order:
+            cart_items = order.get_cart_items
+        else:
+            cart_items = 0
     else:
         cart_items = 0
+        try: 
+            cart = json.loads(request.COOKIES['cart'])
+        except:
+            cart = {}
+        
+        if cart:
+            for item in cart:
+                cart_items += cart[item]['quantity']
+    
     return Response({'cart_items': cart_items})
 
 
